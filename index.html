@@ -52,6 +52,18 @@
     </nav>
 
     <h1>Model Card Information</h1>
+
+    <div class="import-section card">
+        <h2>Import from Spreadsheet</h2>
+        <p>Select a CSV or Excel file containing model card data. The first row will be used to populate the form below.</p>
+        <div class="import-controls">
+            <label for="spreadsheetFile" class="sr-only">Select file:</label> <!-- Screen-reader only label -->
+            <input type="file" id="spreadsheetFile" name="spreadsheetFile" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+            <button type="button" id="importSpreadsheetButton">Load Data from File</button>
+        </div>
+        <div id="importMessageArea" class="message-area"></div> <!-- Specific message area for import -->
+    </div>
+
     <form id="modelCardForm">
         <div id="basic-info" class="form-section accordion-item">
             <h2 class="accordion-header">Basic Information</h2>

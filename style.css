@@ -102,6 +102,102 @@ body {
 }
 /* --- End Navigation Menu Styles --- */
 
+/* --- Import Section Styles --- */
+.import-section {
+    background-color: #ffffff;
+    padding: 20px 25px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    border: 1px solid #e9ecef;
+}
+.import-section h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    border-bottom: none; /* Remove border if inheriting from general h2 */
+    font-size: 1.2em;
+    color: #495057;
+}
+.import-section p {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 0.95em;
+    color: #6c757d;
+}
+.import-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Space between elements */
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+}
+.import-controls input[type="file"] {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 8px; /* Adjust padding */
+    flex-grow: 1; /* Allow input to take available space */
+}
+/* Basic styling for the file input button itself (browser-dependent) */
+.import-controls input[type="file"]::file-selector-button {
+    margin-right: 10px;
+    padding: 8px 12px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.import-controls input[type="file"]::file-selector-button:hover {
+    background-color: #5a6268;
+}
+
+.import-controls button {
+    padding: 9px 20px;
+    background-color: #28a745; /* Green color for load */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+.import-controls button:hover {
+    background-color: #218838;
+}
+.message-area { /* Style for the import message area */
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    display: none; /* Hidden by default */
+    text-align: left;
+}
+.message-area.success {
+    background-color: #d1e7dd;
+    color: #0f5132;
+    border: 1px solid #badbcc;
+    display: block;
+}
+.message-area.error {
+    background-color: #f8d7da;
+    color: #842029;
+    border: 1px solid #f5c2c7;
+    display: block;
+}
+.sr-only { /* Screen-reader only class */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+/* --- End Import Section Styles --- */
+
 
 h1 {
     text-align: center;

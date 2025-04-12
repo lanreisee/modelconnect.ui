@@ -41,6 +41,99 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     // --- End Accordion Logic ---
 
+    // --- Spreadsheet Import Logic ---
+    const fileInput = document.getElementById('spreadsheetFile');
+    const importButton = document.getElementById('importSpreadsheetButton');
+    const importMessageArea = document.getElementById('importMessageArea');
+    const modelForm = document.getElementById('modelCardForm'); // Get the form element
+
+    if (importButton && fileInput && modelForm && importMessageArea) {
+        importButton.addEventListener('click', async () => {
+            importMessageArea.textContent = '';
+            importMessageArea.className = 'message-area'; // Reset class
+
+            if (fileInput.files.length === 0) {
+                importMessageArea.textContent = 'Please select a file first.';
+                importMessageArea.className = 'message-area error';
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const formData = new FormData();
+            formData.append('file', file);
+
+            // Assume Flask server is running on port 5001
+            const uploadUrl = 'http://127.0.0.1:5001/upload-for-form';
+
+            try {
+                importMessageArea.textContent = 'Uploading and processing...';
+                importMessageArea.className = 'message-area info'; // Use a neutral class for processing
+
+                const response = await fetch(uploadUrl, {
+                    method: 'POST',
+                    body: formData,
+                    // Note: Don't set Content-Type header when sending FormData,
+                    // the browser does it automatically with the correct boundary.
+                });
+
+                const result = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(result.error || `HTTP error! Status: ${response.status}`);
+                }
+
+                // Clear existing form fields before populating
+                modelForm.reset();
+                // Also clear the main submit message area if needed
+                const mainMessageArea = document.getElementById('messageArea');
+                if (mainMessageArea) {
+                    mainMessageArea.textContent = '';
+                    mainMessageArea.className = '';
+                }
+
+
+                // Populate the form
+                let fieldsPopulated = 0;
+                for (const key in result) {
+                    const field = modelForm.elements[key]; // Access form elements by name/id
+                    if (field) {
+                        field.value = result[key];
+                        fieldsPopulated++;
+                        // Optional: If you want to open the accordion section containing the populated field
+                        const section = field.closest('.accordion-item');
+                        if (section) {
+                            const header = section.querySelector('.accordion-header');
+                            const content = section.querySelector('.accordion-content');
+                            if (header && content && !header.classList.contains('active')) {
+                                // This logic might open multiple sections if data spans across them.
+                                // Consider if you only want the *first* populated section opened,
+                                // or maybe just leave them closed for the user to review.
+                                // For simplicity now, let's not auto-open them on import.
+                                // header.classList.add('active');
+                                // content.style.display = 'block';
+                                // content.classList.add('active');
+                            }
+                        }
+                    } else {
+                        console.warn(`Form field with name/id '${key}' not found.`);
+                    }
+                }
+
+                importMessageArea.textContent = `Successfully loaded data for ${fieldsPopulated} field(s) from ${file.name}. Please review and submit.`;
+                importMessageArea.className = 'message-area success';
+                fileInput.value = ''; // Clear the file input
+
+            } catch (error) {
+                console.error('Error importing file:', error);
+                importMessageArea.textContent = `Error: ${error.message}`;
+                importMessageArea.className = 'message-area error';
+            }
+        });
+    } else {
+         console.error('Import elements not found (spreadsheetFile, importSpreadsheetButton, modelCardForm, or importMessageArea)');
+    }
+    // --- End Spreadsheet Import Logic ---
+
 
     if (form) {
         form.addEventListener('submit', async (event) => {
