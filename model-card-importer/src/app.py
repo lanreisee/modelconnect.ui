@@ -1,6 +1,7 @@
 import os
 import logging
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, request, jsonify
+from flask_cors import CORS # Import CORS
 from werkzeug.utils import secure_filename
 from parser import parse_spreadsheet # Import the parser function
 
@@ -15,6 +16,7 @@ ALLOWED_EXTENSIONS = {'csv', 'xlsx', 'xls'}
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 app = Flask(__name__)
+CORS(app) # Enable CORS for the entire app
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024 # Limit upload size (e.g., 16MB)
 
