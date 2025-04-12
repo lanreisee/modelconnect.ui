@@ -5,8 +5,8 @@ from fastapi import FastAPI, File, UploadFile, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Dict, Any, Optional
 
-# Assuming parser.py is in the same directory or Python path is configured
-from parser import parse_spreadsheet
+# Use relative import since parser.py is in the same directory
+from .parser import parse_spreadsheet
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
