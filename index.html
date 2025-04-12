@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Card Entry</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="top-nav">
+        <ul class="main-menu">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle">Model Card</a>
+                <ul class="dropdown-menu">
+                    <li><a href="index.html">New</a></li> <!-- Link to current page -->
+                    <li><a href="#">Edit</a></li>
+                    <li><a href="#">Delete</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle">Data Recipe</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">New</a></li>
+                    <li><a href="#">Edit</a></li>
+                    <li><a href="#">Delete</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle">Orchestrate</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">New</a></li>
+                    <li><a href="#">Edit</a></li>
+                    <li><a href="#">Delete</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle">Integration</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Select Tool</a></li>
+                </ul>
+            </li>
+             <li class="dropdown">
+                <a href="#" class="dropdown-toggle">Report</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">New</a></li>
+                    <li><a href="#">Edit</a></li>
+                    <li><a href="#">Delete</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Playground</a></li>
+        </ul>
+    </nav>
+
+    <h1>Model Card Information</h1>
+    <form id="modelCardForm">
+        <div id="basic-info" class="form-section accordion-item">
+            <h2 class="accordion-header">Basic Information</h2>
+            <div class="accordion-content">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea id="description" name="description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="modelStage">Model Stage:</label>
+                    <input type="text" id="modelStage" name="modelStage">
+                </div>
+                <div class="form-group">
+                    <label for="type">Type:</label>
+                    <input type="text" id="type" name="type">
+                </div>
+                <div class="form-group">
+                    <label for="modelCategory">Model Category:</label>
+                    <input type="text" id="modelCategory" name="modelCategory">
+                </div>
+                <div class="form-group">
+                    <label for="modelUseCategory">Model Use Category:</label>
+                    <input type="text" id="modelUseCategory" name="modelUseCategory">
+                </div>
+                <div class="form-group">
+                    <label for="modelOrganization">Model Organization:</label>
+                    <input type="text" id="modelOrganization" name="modelOrganization">
+                </div>
+                <div class="form-group">
+                    <label for="modelRisk">Model Risk:</label>
+                    <input type="text" id="modelRisk" name="modelRisk">
+                </div>
+                 <div class="form-group">
+                    <label for="custom.mocApplicationFormId">MOC Application Form ID:</label>
+                    <input type="text" id="custom.mocApplicationFormId" name="custom.mocApplicationFormId">
+                </div>
+            </div>
+        </div>
+
+        <!-- The duplicated Overview section that was here has been removed. -->
+        <!-- The Accountability section starts below. -->
+
+        <div id="accountability" class="form-section accordion-item">
+            <h2 class="accordion-header">Accountability</h2>
+            <div class="accordion-content">
+                 <div class="form-group">
+                    <label for="custom.Accountability.Who is the business sponsor?">Who is the business sponsor?:</label>
+                    <input type="text" id="custom.Accountability.Who is the business sponsor?" name="custom.Accountability.Who is the business sponsor?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Accountability.What organization does the business sponsor belong to?">What organization does the business sponsor belong to?:</label>
+                <input type="text" id="custom.Accountability.What organization does the business sponsor belong to?" name="custom.Accountability.What organization does the business sponsor belong to?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Accountability.Who is the technical contact for the business sponsor?">Who is the technical contact for the business sponsor?:</label>
+                <input type="text" id="custom.Accountability.Who is the technical contact for the business sponsor?" name="custom.Accountability.Who is the technical contact for the business sponsor?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Accountability.Owner/Developer of the AI Solution">Owner/Developer of the AI Solution:</label>
+                <input type="text" id="custom.Accountability.Owner/Developer of the AI Solution" name="custom.Accountability.Owner/Developer of the AI Solution">
+            </div>
+            <div class="form-group">
+                <label for="custom.Accountability.Accountable AI governance officer for the AI Solution">Accountable AI governance officer for the AI Solution:</label>
+                <input type="text" id="custom.Accountability.Accountable AI governance officer for the AI Solution" name="custom.Accountability.Accountable AI governance officer for the AI Solution">
+            </div>
+            <div class="form-group">
+                <label for="custom.Accountability.Accountable legal officer for the AI solution">Accountable legal officer for the AI solution:</label>
+                <input type="text" id="custom.Accountability.Accountable legal officer for the AI solution" name="custom.Accountability.Accountable legal officer for the AI solution">
+            </div>
+            <div class="form-group">
+                <label for="custom.Accountability.Responsible for completing and/or signing-off on the independent review of the AI Solution">Responsible for completing and/or signing-off on the independent review of the AI Solution:</label>
+                <input type="text" id="custom.Accountability.Responsible for completing and/or signing-off on the independent review of the AI Solution" name="custom.Accountability.Responsible for completing and/or signing-off on the independent review of the AI Solution">
+            </div>
+            </div>
+        </div>
+
+        <div id="scope" class="form-section accordion-item">
+            <h2 class="accordion-header">Scope, Usages, Limitations</h2>
+            <div class="accordion-content">
+                <div class="form-group">
+                    <label for="custom.Scope, Usages, Limitations.Will the AI Solution be used in a clinical, research, or operations setting?">Will the AI Solution be used in a clinical, research, or operations setting?:</label>
+                    <input type="text" id="custom.Scope, Usages, Limitations.Will the AI Solution be used in a clinical, research, or operations setting?" name="custom.Scope, Usages, Limitations.Will the AI Solution be used in a clinical, research, or operations setting?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Scope, Usages, Limitations.Describe who will use the AI tool, i.e. is the AI Solution developed for internal or external users?">Describe who will use the AI tool, i.e. is the AI Solution developed for internal or external users?:</label>
+                <textarea id="custom.Scope, Usages, Limitations.Describe who will use the AI tool, i.e. is the AI Solution developed for internal or external users?" name="custom.Scope, Usages, Limitations.Describe who will use the AI tool, i.e. is the AI Solution developed for internal or external users?"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="custom.Scope, Usages, Limitations.Describe how the AI tool is intended to be used">Describe how the AI tool is intended to be used:</label>
+                <textarea id="custom.Scope, Usages, Limitations.Describe how the AI tool is intended to be used" name="custom.Scope, Usages, Limitations.Describe how the AI tool is intended to be used"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="custom.Scope, Usages, Limitations.Who is the intended patient population?">Who is the intended patient population?:</label>
+                <input type="text" id="custom.Scope, Usages, Limitations.Who is the intended patient population?" name="custom.Scope, Usages, Limitations.Who is the intended patient population?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Scope, Usages, Limitations.Cautioned out-of-scope settings and AI Solutions">Cautioned out-of-scope settings and AI Solutions:</label>
+                <textarea id="custom.Scope, Usages, Limitations.Cautioned out-of-scope settings and AI Solutions" name="custom.Scope, Usages, Limitations.Cautioned out-of-scope settings and AI Solutions"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="custom.Scope, Usages, Limitations.Known risks and limitations">Known risks and limitations:</label>
+                <textarea id="custom.Scope, Usages, Limitations.Known risks and limitations" name="custom.Scope, Usages, Limitations.Known risks and limitations"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="custom.Scope, Usages, Limitations.Known biases or ethical considerations. Are certain target groups unrepresented?">Known biases or ethical considerations. Are certain target groups unrepresented?:</label>
+                <textarea id="custom.Scope, Usages, Limitations.Known biases or ethical considerations. Are certain target groups unrepresented?" name="custom.Scope, Usages, Limitations.Known biases or ethical considerations. Are certain target groups unrepresented?"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="custom.Scope, Usages, Limitations.What is the approach to mitigate any potential biases?">What is the approach to mitigate any potential biases?:</label>
+                <textarea id="custom.Scope, Usages, Limitations.What is the approach to mitigate any potential biases?" name="custom.Scope, Usages, Limitations.What is the approach to mitigate any potential biases?"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="custom.Scope, Usages, Limitations.Describe the outcomes and outputs of the model">Describe the outcomes and outputs of the model:</label>
+                <textarea id="custom.Scope, Usages, Limitations.Describe the outcomes and outputs of the model" name="custom.Scope, Usages, Limitations.Describe the outcomes and outputs of the model"></textarea>
+            </div>
+            </div>
+        </div>
+
+        <div id="solution" class="form-section accordion-item">
+            <h2 class="accordion-header">Solution Details</h2>
+            <div class="accordion-content">
+                 <div class="form-group">
+                    <label for="custom.Solution Details.Is the AI Solution a build: internal, buy, or partner:co-development?">Is the AI Solution a build: internal, buy, or partner:co-development?:</label>
+                    <input type="text" id="custom.Solution Details.Is the AI Solution a build: internal, buy, or partner:co-development?" name="custom.Solution Details.Is the AI Solution a build: internal, buy, or partner:co-development?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Solution Details.If in a clinical setting, will the solution be used in the clinical management of patients?">If in a clinical setting, will the solution be used in the clinical management of patients?:</label>
+                <input type="text" id="custom.Solution Details.If in a clinical setting, will the solution be used in the clinical management of patients?" name="custom.Solution Details.If in a clinical setting, will the solution be used in the clinical management of patients?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Solution Details.Patient consent or disclosure required or suggested?">Patient consent or disclosure required or suggested?:</label>
+                <input type="text" id="custom.Solution Details.Patient consent or disclosure required or suggested?" name="custom.Solution Details.Patient consent or disclosure required or suggested?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Solution Details.If in a clinical setting, will a certified health care provider be responsible for any AI assisted decision?">If in a clinical setting, will a certified health care provider be responsible for any AI assisted decision?:</label>
+                <input type="text" id="custom.Solution Details.If in a clinical setting, will a certified health care provider be responsible for any AI assisted decision?" name="custom.Solution Details.If in a clinical setting, will a certified health care provider be responsible for any AI assisted decision?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Solution Details.Will there be any significant changes to workflow after deployment of the AI solution?">Will there be any significant changes to workflow after deployment of the AI solution?:</label>
+                <input type="text" id="custom.Solution Details.Will there be any significant changes to workflow after deployment of the AI solution?" name="custom.Solution Details.Will there be any significant changes to workflow after deployment of the AI solution?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Solution Details.If there is a workflow impact, will there be a transition and training plan?">If there is a workflow impact, will there be a transition and training plan?:</label>
+                <input type="text" id="custom.Solution Details.If there is a workflow impact, will there be a transition and training plan?" name="custom.Solution Details.If there is a workflow impact, will there be a transition and training plan?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Solution Details.Does the AI Solution automate any decisions-clinical or other?">Does the AI Solution automate any decisions-clinical or other?:</label>
+                <input type="text" id="custom.Solution Details.Does the AI Solution automate any decisions-clinical or other?" name="custom.Solution Details.Does the AI Solution automate any decisions-clinical or other?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Solution Details.If so, how are errors and poor performance detected?">If so, how are errors and poor performance detected?:</label>
+                <input type="text" id="custom.Solution Details.If so, how are errors and poor performance detected?" name="custom.Solution Details.If so, how are errors and poor performance detected?">
+            </div>
+            </div>
+        </div>
+
+        <div id="data" class="form-section accordion-item">
+            <h2 class="accordion-header">Data</h2>
+            <div class="accordion-content">
+                <div class="form-group">
+                    <label for="custom.Data.Data sensitivity classification, e.g. public, internal, confidential, restricted confidential for data used in the model during training and/or execution">Data sensitivity classification:</label>
+                    <input type="text" id="custom.Data.Data sensitivity classification, e.g. public, internal, confidential, restricted confidential for data used in the model during training and/or execution" name="custom.Data.Data sensitivity classification, e.g. public, internal, confidential, restricted confidential for data used in the model during training and/or execution">
+            </div>
+            <div class="form-group">
+                <label for="custom.Data.Does the AI Solution have access to patient specific information?">Does the AI Solution have access to patient specific information?:</label>
+                <input type="text" id="custom.Data.Does the AI Solution have access to patient specific information?" name="custom.Data.Does the AI Solution have access to patient specific information?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Data.If the solution has access to patient data, is the information available to the vendor?">If the solution has access to patient data, is the information available to the vendor?:</label>
+                <input type="text" id="custom.Data.If the solution has access to patient data, is the information available to the vendor?" name="custom.Data.If the solution has access to patient data, is the information available to the vendor?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Data.If the solution has access to patient data, where is the information stored?">If the solution has access to patient data, where is the information stored?:</label>
+                <input type="text" id="custom.Data.If the solution has access to patient data, where is the information stored?" name="custom.Data.If the solution has access to patient data, where is the information stored?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Data.What data is needed for the model to function?">What data is needed for the model to function?:</label>
+                <textarea id="custom.Data.What data is needed for the model to function?" name="custom.Data.What data is needed for the model to function?"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="custom.Data.What data is stored and where?">What data is stored and where?:</label>
+                <textarea id="custom.Data.What data is stored and where?" name="custom.Data.What data is stored and where?"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="custom.Data.Who has access to this data?">Who has access to this data?:</label>
+                <input type="text" id="custom.Data.Who has access to this data?" name="custom.Data.Who has access to this data?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Data.Who maintains the data?">Who maintains the data?:</label>
+                <input type="text" id="custom.Data.Who maintains the data?" name="custom.Data.Who maintains the data?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Data.How long is data maintained?">How long is data maintained?:</label>
+                <input type="text" id="custom.Data.How long is data maintained?" name="custom.Data.How long is data maintained?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Data.Can data be edited? If so, is an audit trail available?">Can data be edited? If so, is an audit trail available?:</label>
+                <input type="text" id="custom.Data.Can data be edited? If so, is an audit trail available?" name="custom.Data.Can data be edited? If so, is an audit trail available?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Data.Do we have high quality data accessible for the AI Solution?">Do we have high quality data accessible for the AI Solution?:</label>
+                <input type="text" id="custom.Data.Do we have high quality data accessible for the AI Solution?" name="custom.Data.Do we have high quality data accessible for the AI Solution?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Data.Output/Input data type">Output/Input data type:</label>
+                <input type="text" id="custom.Data.Output/Input data type" name="custom.Data.Output/Input data type">
+            </div>
+            <div class="form-group">
+                <label for="custom.Data.Development data characterization">Development data characterization:</label>
+                <textarea id="custom.Data.Development data characterization" name="custom.Data.Development data characterization"></textarea>
+            </div>
+            </div>
+        </div>
+
+        <div id="implementation" class="form-section accordion-item">
+            <h2 class="accordion-header">Implementation and Policy Adherence</h2>
+            <div class="accordion-content">
+                <div class="form-group">
+                    <label for="custom.Implementation and Policy Adherence.Describe the technology briefly">Describe the technology briefly:</label>
+                    <textarea id="custom.Implementation and Policy Adherence.Describe the technology briefly" name="custom.Implementation and Policy Adherence.Describe the technology briefly"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="custom.Implementation and Policy Adherence.Does the technology use LLMs? What foundation model is used?">Does the technology use LLMs? What foundation model is used?:</label>
+                <input type="text" id="custom.Implementation and Policy Adherence.Does the technology use LLMs? What foundation model is used?" name="custom.Implementation and Policy Adherence.Does the technology use LLMs? What foundation model is used?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Implementation and Policy Adherence.Methodology used to implement the AI Solution">Methodology used to implement the AI Solution:</label>
+                <input type="text" id="custom.Implementation and Policy Adherence.Methodology used to implement the AI Solution" name="custom.Implementation and Policy Adherence.Methodology used to implement the AI Solution">
+            </div>
+            <div class="form-group">
+                <label for="custom.Implementation and Policy Adherence.Describe how the technology handles  errors? Include any mitigation strategies.">Describe how the technology handles errors? Include any mitigation strategies.:</label>
+                <textarea id="custom.Implementation and Policy Adherence.Describe how the technology handles  errors? Include any mitigation strategies." name="custom.Implementation and Policy Adherence.Describe how the technology handles  errors? Include any mitigation strategies."></textarea>
+            </div>
+            <div class="form-group">
+                <label for="custom.Implementation and Policy Adherence.Does the technology have a means to report or identify adverse events?">Does the technology have a means to report or identify adverse events?:</label>
+                <input type="text" id="custom.Implementation and Policy Adherence.Does the technology have a means to report or identify adverse events?" name="custom.Implementation and Policy Adherence.Does the technology have a means to report or identify adverse events?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Implementation and Policy Adherence.Has the technology been validated by the vendor?">Has the technology been validated by the vendor?:</label>
+                <input type="text" id="custom.Implementation and Policy Adherence.Has the technology been validated by the vendor?" name="custom.Implementation and Policy Adherence.Has the technology been validated by the vendor?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Implementation and Policy Adherence.Is the technology cloud based or hosted locally?">Is the technology cloud based or hosted locally?:</label>
+                <input type="text" id="custom.Implementation and Policy Adherence.Is the technology cloud based or hosted locally?" name="custom.Implementation and Policy Adherence.Is the technology cloud based or hosted locally?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Implementation and Policy Adherence.If cloud based, is the vendor TX-RAMP compliant?">If cloud based, is the vendor TX-RAMP compliant?:</label>
+                <input type="text" id="custom.Implementation and Policy Adherence.If cloud based, is the vendor TX-RAMP compliant?" name="custom.Implementation and Policy Adherence.If cloud based, is the vendor TX-RAMP compliant?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Implementation and Policy Adherence.If cloud based, who has access to the MDA data?">If cloud based, who has access to the MDA data?:</label>
+                <input type="text" id="custom.Implementation and Policy Adherence.If cloud based, who has access to the MDA data?" name="custom.Implementation and Policy Adherence.If cloud based, who has access to the MDA data?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Implementation and Policy Adherence.Does the vendor have a Business Associates agreement with MDA?">Does the vendor have a Business Associates agreement with MDA?:</label>
+                <input type="text" id="custom.Implementation and Policy Adherence.Does the vendor have a Business Associates agreement with MDA?" name="custom.Implementation and Policy Adherence.Does the vendor have a Business Associates agreement with MDA?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Implementation and Policy Adherence.Is the AI Solution compliant with MDACC policies and applicable regulations">Is the AI Solution compliant with MDACC policies and applicable regulations:</label>
+                <input type="text" id="custom.Implementation and Policy Adherence.Is the AI Solution compliant with MDACC policies and applicable regulations" name="custom.Implementation and Policy Adherence.Is the AI Solution compliant with MDACC policies and applicable regulations">
+            </div>
+            <div class="form-group">
+                <label for="custom.Implementation and Policy Adherence.Does the technology meet all State of Texas regulations and laws?">Does the technology meet all State of Texas regulations and laws?:</label>
+                <input type="text" id="custom.Implementation and Policy Adherence.Does the technology meet all State of Texas regulations and laws?" name="custom.Implementation and Policy Adherence.Does the technology meet all State of Texas regulations and laws?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Implementation and Policy Adherence.Does the technology meet all Federal regulations?">Does the technology meet all Federal regulations?:</label>
+                <input type="text" id="custom.Implementation and Policy Adherence.Does the technology meet all Federal regulations?" name="custom.Implementation and Policy Adherence.Does the technology meet all Federal regulations?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Implementation and Policy Adherence.Does the technology place practitioners / employees at greater risk?">Does the technology place practitioners / employees at greater risk?:</label>
+                <input type="text" id="custom.Implementation and Policy Adherence.Does the technology place practitioners / employees at greater risk?" name="custom.Implementation and Policy Adherence.Does the technology place practitioners / employees at greater risk?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Implementation and Policy Adherence.Does the AI solution involve recording of patients or employees?">Does the AI solution involve recording of patients or employees?:</label>
+                <input type="text" id="custom.Implementation and Policy Adherence.Does the AI solution involve recording of patients or employees?" name="custom.Implementation and Policy Adherence.Does the AI solution involve recording of patients or employees?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Implementation and Policy Adherence.If recording is present, who has access to the recordings, for what purposes, and for how long?">If recording is present, who has access to the recordings, for what purposes, and for how long?:</label>
+                <textarea id="custom.Implementation and Policy Adherence.If recording is present, who has access to the recordings, for what purposes, and for how long?" name="custom.Implementation and Policy Adherence.If recording is present, who has access to the recordings, for what purposes, and for how long?"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="custom.Implementation and Policy Adherence.If recording is present, is consent necessary and obtainable?">If recording is present, is consent necessary and obtainable?:</label>
+                <input type="text" id="custom.Implementation and Policy Adherence.If recording is present, is consent necessary and obtainable?" name="custom.Implementation and Policy Adherence.If recording is present, is consent necessary and obtainable?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Implementation and Policy Adherence.Does the AI Solution need to be adapted / trained for MDA specifically?">Does the AI Solution need to be adapted / trained for MDA specifically?:</label>
+                <input type="text" id="custom.Implementation and Policy Adherence.Does the AI Solution need to be adapted / trained for MDA specifically?" name="custom.Implementation and Policy Adherence.Does the AI Solution need to be adapted / trained for MDA specifically?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Implementation and Policy Adherence.If the AI solution needs to be trained for MDA, does the vendor have any intellectual property rights to the trained model?">If the AI solution needs to be trained for MDA, does the vendor have any intellectual property rights to the trained model?:</label>
+                <input type="text" id="custom.Implementation and Policy Adherence.If the AI solution needs to be trained for MDA, does the vendor have any intellectual property rights to the trained model?" name="custom.Implementation and Policy Adherence.If the AI solution needs to be trained for MDA, does the vendor have any intellectual property rights to the trained model?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Implementation and Policy Adherence.Is there explicit wording in agreement covering secondary use of MDA data?">Is there explicit wording in agreement covering secondary use of MDA data?:</label>
+                <input type="text" id="custom.Implementation and Policy Adherence.Is there explicit wording in agreement covering secondary use of MDA data?" name="custom.Implementation and Policy Adherence.Is there explicit wording in agreement covering secondary use of MDA data?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Implementation and Policy Adherence.Is a BAA needed to allow vendor to handle MDA data?">Is a BAA needed to allow vendor to handle MDA data?:</label>
+                <input type="text" id="custom.Implementation and Policy Adherence.Is a BAA needed to allow vendor to handle MDA data?" name="custom.Implementation and Policy Adherence.Is a BAA needed to allow vendor to handle MDA data?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Implementation and Policy Adherence.Are MDA data  used by vendor to re-train their model?">Are MDA data used by vendor to re-train their model?:</label>
+                <input type="text" id="custom.Implementation and Policy Adherence.Are MDA data  used by vendor to re-train their model?" name="custom.Implementation and Policy Adherence.Are MDA data  used by vendor to re-train their model?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Implementation and Policy Adherence.If MDA data is being used by vendor to re-train their model, which data?">If MDA data is being used by vendor to re-train their model, which data?:</label>
+                <input type="text" id="custom.Implementation and Policy Adherence.If MDA data is being used by vendor to re-train their model, which data?" name="custom.Implementation and Policy Adherence.If MDA data is being used by vendor to re-train their model, which data?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Implementation and Policy Adherence.If the technology has been validated, please reference any published studies or marketing material">If the technology has been validated, please reference any published studies or marketing material:</label>
+                <textarea id="custom.Implementation and Policy Adherence.If the technology has been validated, please reference any published studies or marketing material" name="custom.Implementation and Policy Adherence.If the technology has been validated, please reference any published studies or marketing material"></textarea>
+            </div>
+            </div>
+        </div>
+
+        <div id="monitoring" class="form-section accordion-item">
+            <h2 class="accordion-header">Monitoring and Maintenance</h2>
+            <div class="accordion-content">
+                <div class="form-group">
+                    <label for="custom.Monitoring and Maintenance.After implementation, how will the performance of the AI solution be assessed?">After implementation, how will the performance of the AI solution be assessed?:</label>
+                    <textarea id="custom.Monitoring and Maintenance.After implementation, how will the performance of the AI solution be assessed?" name="custom.Monitoring and Maintenance.After implementation, how will the performance of the AI solution be assessed?"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="custom.Monitoring and Maintenance.What metric will be used?">What metric will be used?:</label>
+                <input type="text" id="custom.Monitoring and Maintenance.What metric will be used?" name="custom.Monitoring and Maintenance.What metric will be used?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Monitoring and Maintenance.What is the target?">What is the target?:</label>
+                <input type="text" id="custom.Monitoring and Maintenance.What is the target?" name="custom.Monitoring and Maintenance.What is the target?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Monitoring and Maintenance.How does the model identify drift?, e.g. drift may occur when the data which is used to train the model no longer represents the current situation">How does the model identify drift?:</label>
+                <textarea id="custom.Monitoring and Maintenance.How does the model identify drift?, e.g. drift may occur when the data which is used to train the model no longer represents the current situation" name="custom.Monitoring and Maintenance.How does the model identify drift?, e.g. drift may occur when the data which is used to train the model no longer represents the current situation"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="custom.Monitoring and Maintenance.How does the model handle updates? How is it validated?">How does the model handle updates? How is it validated?:</label>
+                <textarea id="custom.Monitoring and Maintenance.How does the model handle updates? How is it validated?" name="custom.Monitoring and Maintenance.How does the model handle updates? How is it validated?"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="custom.Monitoring and Maintenance.How will the AI solution be maintained?">How will the AI solution be maintained?:</label>
+                <textarea id="custom.Monitoring and Maintenance.How will the AI solution be maintained?" name="custom.Monitoring and Maintenance.How will the AI solution be maintained?"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="custom.Monitoring and Maintenance.How frequent are updates made?">How frequent are updates made?:</label>
+                <input type="text" id="custom.Monitoring and Maintenance.How frequent are updates made?" name="custom.Monitoring and Maintenance.How frequent are updates made?">
+            </div>
+            <div class="form-group">
+                <label for="custom.Monitoring and Maintenance.If there is MDA specific fine tuning of models, how is testing performed prior to deployment of updates?">If there is MDA specific fine tuning of models, how is testing performed prior to deployment of updates?:</label>
+                <textarea id="custom.Monitoring and Maintenance.If there is MDA specific fine tuning of models, how is testing performed prior to deployment of updates?" name="custom.Monitoring and Maintenance.If there is MDA specific fine tuning of models, how is testing performed prior to deployment of updates?"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="custom.Monitoring and Maintenance.Approver Name for Security and compliance environment practice review">Approver Name for Security and compliance environment practice review:</label>
+                <input type="text" id="custom.Monitoring and Maintenance.Approver Name for Security and compliance environment practice review" name="custom.Monitoring and Maintenance.Approver Name for Security and compliance environment practice review">
+            </div>
+            </div>
+        </div>
+
+        <div id="metrics-usefulness" class="form-section accordion-item">
+            <h2 class="accordion-header">Key Metrics - Usefulness, Usability, and Efficacy</h2>
+            <div class="accordion-content">
+                <div class="form-group">
+                    <label for="custom.Key Metrics.Usefulness, Usability, and Efficacy-Goal of metric">Goal of metric:</label>
+                    <input type="text" id="custom.Key Metrics.Usefulness, Usability, and Efficacy-Goal of metric" name="custom.Key Metrics.Usefulness, Usability, and Efficacy-Goal of metric">
+            </div>
+            <div class="form-group">
+                <label for="custom.Key Metrics.Usefulness, Usability, and Efficacy-Result">Result:</label>
+                <input type="text" id="custom.Key Metrics.Usefulness, Usability, and Efficacy-Result" name="custom.Key Metrics.Usefulness, Usability, and Efficacy-Result">
+            </div>
+            <div class="form-group">
+                <label for="custom.Key Metrics.Usefulness, Usability, and Efficacy-Interpretation">Interpretation:</label>
+                <textarea id="custom.Key Metrics.Usefulness, Usability, and Efficacy-Interpretation" name="custom.Key Metrics.Usefulness, Usability, and Efficacy-Interpretation"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="custom.Key Metrics.Usefulness, Usability, and Efficacy-Test Type">Test Type:</label>
+                <input type="text" id="custom.Key Metrics.Usefulness, Usability, and Efficacy-Test Type" name="custom.Key Metrics.Usefulness, Usability, and Efficacy-Test Type">
+            </div>
+            <div class="form-group">
+                <label for="custom.Key Metrics.Usefulness, Usability, and Efficacy-Testing Data Description">Testing Data Description:</label>
+                <textarea id="custom.Key Metrics.Usefulness, Usability, and Efficacy-Testing Data Description" name="custom.Key Metrics.Usefulness, Usability, and Efficacy-Testing Data Description"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="custom.Key Metrics.Usefulness, Usability, and Efficacy-Validation Process and Justification">Validation Process and Justification:</label>
+                <textarea id="custom.Key Metrics.Usefulness, Usability, and Efficacy-Validation Process and Justification" name="custom.Key Metrics.Usefulness, Usability, and Efficacy-Validation Process and Justification"></textarea>
+            </div>
+            </div>
+        </div>
+
+        <div id="metrics-fairness" class="form-section accordion-item">
+            <h2 class="accordion-header">Key Metrics - Fairness and Equity</h2>
+            <div class="accordion-content">
+                <div class="form-group">
+                    <label for="custom.Key Metrics.Fairness and Equity-Goal of metric">Goal of metric:</label>
+                    <input type="text" id="custom.Key Metrics.Fairness and Equity-Goal of metric" name="custom.Key Metrics.Fairness and Equity-Goal of metric">
+            </div>
+            <div class="form-group">
+                <label for="custom.Key Metrics.Fairness and Equity-Result">Result:</label>
+                <input type="text" id="custom.Key Metrics.Fairness and Equity-Result" name="custom.Key Metrics.Fairness and Equity-Result">
+            </div>
+            <div class="form-group">
+                <label for="custom.Key Metrics.Fairness and Equity-Interpretation">Interpretation:</label>
+                <textarea id="custom.Key Metrics.Fairness and Equity-Interpretation" name="custom.Key Metrics.Fairness and Equity-Interpretation"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="custom.Key Metrics.Fairness and Equity-Test Type">Test Type:</label>
+                <input type="text" id="custom.Key Metrics.Fairness and Equity-Test Type" name="custom.Key Metrics.Fairness and Equity-Test Type">
+            </div>
+            <div class="form-group">
+                <label for="custom.Key Metrics.Fairness and Equity-Testing Data Description">Testing Data Description:</label>
+                <textarea id="custom.Key Metrics.Fairness and Equity-Testing Data Description" name="custom.Key Metrics.Fairness and Equity-Testing Data Description"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="custom.Key Metrics.Fairness and Equity-Validation Process and Justification">Validation Process and Justification:</label>
+                <textarea id="custom.Key Metrics.Fairness and Equity-Validation Process and Justification" name="custom.Key Metrics.Fairness and Equity-Validation Process and Justification"></textarea>
+            </div>
+            </div>
+        </div>
+
+        <div id="metrics-safety" class="form-section accordion-item">
+            <h2 class="accordion-header">Key Metrics - Safety and Reliability</h2>
+            <div class="accordion-content">
+                <div class="form-group">
+                    <label for="custom.Key Metrics.Safety and Reliability-Goal of metric">Goal of metric:</label>
+                    <input type="text" id="custom.Key Metrics.Safety and Reliability-Goal of metric" name="custom.Key Metrics.Safety and Reliability-Goal of metric">
+            </div>
+            <div class="form-group">
+                <label for="custom.Key Metrics.Safety and Reliability-Result">Result:</label>
+                <input type="text" id="custom.Key Metrics.Safety and Reliability-Result" name="custom.Key Metrics.Safety and Reliability-Result">
+            </div>
+            <div class="form-group">
+                <label for="custom.Key Metrics.Safety and Reliability-Interpretation">Interpretation:</label>
+                <textarea id="custom.Key Metrics.Safety and Reliability-Interpretation" name="custom.Key Metrics.Safety and Reliability-Interpretation"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="custom.Key Metrics.Safety and Reliability-Test Type">Test Type:</label>
+                <input type="text" id="custom.Key Metrics.Safety and Reliability-Test Type" name="custom.Key Metrics.Safety and Reliability-Test Type">
+            </div>
+            <div class="form-group">
+                <label for="custom.Key Metrics.Safety and Reliability-Testing Data Description">Testing Data Description:</label>
+                <textarea id="custom.Key Metrics.Safety and Reliability-Testing Data Description" name="custom.Key Metrics.Safety and Reliability-Testing Data Description"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="custom.Key Metrics.Safety and Reliability-Validation Process and Justification">Validation Process and Justification:</label>
+                <textarea id="custom.Key Metrics.Safety and Reliability-Validation Process and Justification" name="custom.Key Metrics.Safety and Reliability-Validation Process and Justification"></textarea>
+            </div>
+            </div>
+        </div>
+
+        <button type="submit">Submit Model Card</button>
+    </form>
+
+    <div id="messageArea"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

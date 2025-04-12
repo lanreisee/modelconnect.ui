@@ -1,0 +1,274 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* Common system fonts */
+    line-height: 1.6;
+    margin: 0 auto; /* Center the content */
+    padding: 20px;
+    max-width: 900px; /* Limit width for better readability */
+    background-color: #f8f9fa; /* Lighter background */
+    color: #212529; /* Default text color */
+    padding-top: 80px; /* Add padding top to prevent content hiding behind fixed nav */
+}
+
+/* --- Navigation Menu Styles --- */
+.top-nav {
+    background-color: #ffffff;
+    border-bottom: 1px solid #dee2e6;
+    padding: 0 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.top-nav ul.main-menu { /* Target the main menu specifically */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens if needed */
+}
+
+.top-nav li {
+    position: relative; /* Needed for absolute positioning of dropdown */
+    margin-right: 5px; /* Adjust spacing */
+}
+
+.top-nav li a { /* Style for all links in nav */
+    display: block;
+    text-decoration: none;
+    color: #495057;
+    padding: 10px 15px; /* Adjust padding */
+    border-radius: 4px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    font-size: 0.95em;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.top-nav li a:hover {
+    background-color: #e9ecef;
+    color: #0056b3;
+}
+
+/* Dropdown Specific Styles */
+.dropdown-menu {
+    display: none; /* Hide dropdowns by default */
+    position: absolute;
+    left: 0;
+    top: 100%; /* Position below the parent li */
+    background-color: #ffffff;
+    list-style: none;
+    padding: 5px 0;
+    margin: 0;
+    min-width: 160px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    z-index: 1001; /* Ensure dropdown is above other nav items */
+}
+
+.dropdown:hover .dropdown-menu,
+.dropdown:focus-within .dropdown-menu { /* Show on hover/focus */
+    display: block;
+}
+
+.dropdown-menu li {
+    margin-right: 0; /* Remove margin for dropdown items */
+}
+
+.dropdown-menu li a {
+    padding: 8px 15px;
+    font-size: 0.9em;
+    font-weight: 400;
+    color: #495057;
+    white-space: nowrap;
+}
+
+.dropdown-menu li a:hover {
+    background-color: #e9ecef;
+    color: #0056b3;
+}
+
+.dropdown-toggle::after { /* Optional: Add dropdown indicator */
+    content: ' ▼';
+    font-size: 0.7em;
+    vertical-align: middle;
+    margin-left: 4px;
+}
+/* --- End Navigation Menu Styles --- */
+
+
+h1 {
+    text-align: center;
+    color: #343a40; /* Darker heading color */
+    margin-bottom: 30px;
+    font-weight: 500;
+    /* margin-top: 0; <-- Removed */
+}
+
+/* Accordion Styles */
+#modelCardForm {
+    background: #ffffff; /* White background for form */
+    padding: 0; /* Remove padding, handled by accordion items */
+    border-radius: 8px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08); /* Softer shadow */
+    border: 1px solid #e9ecef; /* Light border */
+    overflow: hidden; /* Ensure border radius applies correctly */
+}
+
+.accordion-item {
+    border-bottom: 1px solid #dee2e6; /* Separator between items */
+}
+.accordion-item:last-child {
+    border-bottom: none; /* No border for the last item */
+}
+
+.accordion-header {
+    background-color: #f8f9fa; /* Light grey header */
+    padding: 15px 20px; /* More padding */
+    cursor: pointer;
+    margin: 0; /* Reset h2 margins */
+    position: relative; /* For positioning the indicator */
+    font-size: 1.15em; /* Slightly larger */
+    font-weight: 500;
+    color: #495057;
+    transition: background-color 0.2s ease;
+    user-select: none; /* Prevent text selection on click */
+}
+
+.accordion-header:hover {
+    background-color: #e9ecef; /* Darker on hover */
+}
+
+.accordion-header::after { /* Indicator */
+    content: '+'; /* Plus sign */
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5em; /* Larger indicator */
+    font-weight: 300; /* Lighter weight */
+    color: #6c757d;
+    transition: transform 0.2s ease; /* Smooth rotation */
+}
+
+.accordion-header.active::after {
+    content: '\\2212'; /* Unicode minus sign */
+    transform: translateY(-50%) rotate(180deg); /* Rotate plus */
+}
+
+.accordion-content {
+    padding: 25px; /* Content padding */
+    display: none; /* Hide content by default */
+    background-color: #ffffff;
+    border-top: 1px solid #dee2e6; /* Separator line */
+    animation: fadeIn 0.3s ease; /* Fade in animation */
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.accordion-content.active {
+    display: block; /* Show content when active */
+}
+
+/* Form Group and Input Styles (within accordion content) */
+.form-group {
+    margin-bottom: 20px; /* Slightly more space between fields */
+}
+.form-group:last-child {
+    margin-bottom: 0; /* No margin for the last group in a section */
+}
+
+label {
+    display: block;
+    margin-bottom: 8px; /* Space between label and input */
+    font-weight: 500; /* Medium weight */
+    color: #495057;
+    font-size: 0.95em;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 12px; /* Larger padding */
+    border: 1px solid #ced4da; /* Lighter border */
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1em;
+    color: #495057;
+    background-color: #fff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+textarea {
+    min-height: 100px; /* Increased min-height */
+    resize: vertical;
+}
+
+/* Submit Button */
+button[type="submit"] {
+    display: block; /* Make it block to center */
+    width: fit-content; /* Fit width to content */
+    padding: 12px 35px; /* More horizontal padding */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em; /* Larger font */
+    font-weight: 500;
+    margin: 30px auto 0 auto; /* Center button with top margin */
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Message Area */
+#messageArea {
+    margin-top: 25px; /* More space */
+    padding: 15px; /* More padding */
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1.05em;
+    display: none; /* Hide initially */
+}
+
+#messageArea.success {
+    background-color: #d1e7dd; /* Bootstrap success background */
+    color: #0f5132; /* Bootstrap success text */
+    border: 1px solid #badbcc; /* Bootstrap success border */
+    display: block;
+}
+
+#messageArea.error {
+    background-color: #f8d7da; /* Bootstrap danger background */
+    color: #842029; /* Bootstrap danger text */
+    border: 1px solid #f5c2c7; /* Bootstrap danger border */
+    display: block;
+}
+
+/* Remove default section styling */
+.form-section {
+    margin-bottom: 0;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+}
