@@ -1,5 +1,6 @@
 pandas>=1.0.0
 openpyxl>=3.0.0 # For reading .xlsx files
 pytest>=6.0.0 # For running tests
-Flask>=2.0.0 # For the API wrapper
-Flask-CORS>=3.0.0 # To handle Cross-Origin Resource Sharing
+fastapi>=0.70.0 # FastAPI framework
+uvicorn[standard]>=0.15.0 # ASGI server to run FastAPI
+python-multipart>=0.0.5 # Needed for file uploads in FastAPI
