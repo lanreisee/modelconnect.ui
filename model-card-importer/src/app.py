@@ -3,7 +3,7 @@ import logging
 import shutil
 from fastapi import FastAPI, File, UploadFile, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, List # Import List
 
 # Use relative import since parser.py is in the same directory
 from .parser import parse_spreadsheet
@@ -37,7 +37,8 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.post("/upload-for-form", response_model=Optional[Dict[str, Any]])
+# Update response model to List[Dict]
+@app.post("/upload-for-form", response_model=Optional[List[Dict[str, Any]]])
 async def upload_file_for_form(file: UploadFile = File(...)):
     """
     Handles spreadsheet upload, parses the first row, and returns data

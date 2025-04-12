@@ -45,12 +45,55 @@ document.addEventListener('DOMContentLoaded', () => {
     const fileInput = document.getElementById('spreadsheetFile');
     const importButton = document.getElementById('importSpreadsheetButton');
     const importMessageArea = document.getElementById('importMessageArea');
-    const modelForm = document.getElementById('modelCardForm'); // Get the form element
+    const modelForm = document.getElementById('modelCardForm');
+    const recordNavDiv = document.getElementById('recordNavigation');
+    const prevButton = document.getElementById('prevRecordButton');
+    const nextButton = document.getElementById('nextRecordButton');
+    const recordCounterSpan = document.getElementById('recordCounter');
 
-    if (importButton && fileInput && modelForm && importMessageArea) {
+    let importedRecords = []; // To store the array of records from the file
+    let currentRecordIndex = -1; // Index of the currently displayed record
+
+    // Function to display a specific record in the form
+    function displayRecord(index) {
+        if (index < 0 || index >= importedRecords.length) {
+            console.error("Invalid record index:", index);
+            return;
+        }
+        currentRecordIndex = index;
+        const record = importedRecords[index];
+
+        // Clear existing form fields before populating
+        modelForm.reset();
+
+        // Populate the form
+        for (const key in record) {
+            const field = modelForm.elements[key];
+            if (field) {
+                 // Handle different input types if necessary in the future (e.g., checkboxes)
+                 // For now, assuming all are text/textarea
+                field.value = record[key];
+            } else {
+                console.warn(`Form field with name/id '${key}' not found for record ${index}.`);
+            }
+        }
+
+        // Update navigation controls
+        recordCounterSpan.textContent = `Record ${index + 1} of ${importedRecords.length}`;
+        prevButton.disabled = (index === 0);
+        nextButton.disabled = (index === importedRecords.length - 1);
+        recordNavDiv.style.display = 'block'; // Show navigation
+    }
+
+    if (importButton && fileInput && modelForm && importMessageArea && recordNavDiv && prevButton && nextButton && recordCounterSpan) {
         importButton.addEventListener('click', async () => {
+            // Reset state before import
             importMessageArea.textContent = '';
-            importMessageArea.className = 'message-area'; // Reset class
+            importMessageArea.className = 'message-area';
+            recordNavDiv.style.display = 'none';
+            importedRecords = [];
+            currentRecordIndex = -1;
+            modelForm.reset(); // Clear form
 
             if (fileInput.files.length === 0) {
                 importMessageArea.textContent = 'Please select a file first.';
@@ -82,45 +125,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     throw new Error(result.error || `HTTP error! Status: ${response.status}`);
                 }
 
-                // Clear existing form fields before populating
-                modelForm.reset();
-                // Also clear the main submit message area if needed
-                const mainMessageArea = document.getElementById('messageArea');
-                if (mainMessageArea) {
-                    mainMessageArea.textContent = '';
-                    mainMessageArea.className = '';
+                // --- Handle multiple records ---
+                if (Array.isArray(result) && result.length > 0) {
+                    importedRecords = result; // Store the array
+                    displayRecord(0); // Display the first record
+                    importMessageArea.textContent = `Successfully loaded ${importedRecords.length} record(s) from ${file.name}.`;
+                    importMessageArea.className = 'message-area success';
+                } else if (Array.isArray(result) && result.length === 0) {
+                    importMessageArea.textContent = 'Spreadsheet parsed, but no data rows found.';
+                    importMessageArea.className = 'message-area warning'; // Use a warning style
+                     recordNavDiv.style.display = 'none'; // Hide nav if no records
                 }
+                 else {
+                     // Handle case where API might return non-array or unexpected format
+                     console.error("Received unexpected data format from API:", result);
+                     throw new Error("Received unexpected data format from server.");
+                 }
+                // --------------------------------
 
-
-                // Populate the form
-                let fieldsPopulated = 0;
-                for (const key in result) {
-                    const field = modelForm.elements[key]; // Access form elements by name/id
-                    if (field) {
-                        field.value = result[key];
-                        fieldsPopulated++;
-                        // Optional: If you want to open the accordion section containing the populated field
-                        const section = field.closest('.accordion-item');
-                        if (section) {
-                            const header = section.querySelector('.accordion-header');
-                            const content = section.querySelector('.accordion-content');
-                            if (header && content && !header.classList.contains('active')) {
-                                // This logic might open multiple sections if data spans across them.
-                                // Consider if you only want the *first* populated section opened,
-                                // or maybe just leave them closed for the user to review.
-                                // For simplicity now, let's not auto-open them on import.
-                                // header.classList.add('active');
-                                // content.style.display = 'block';
-                                // content.classList.add('active');
-                            }
-                        }
-                    } else {
-                        console.warn(`Form field with name/id '${key}' not found.`);
-                    }
-                }
-
-                importMessageArea.textContent = `Successfully loaded data for ${fieldsPopulated} field(s) from ${file.name}. Please review and submit.`;
-                importMessageArea.className = 'message-area success';
                 fileInput.value = ''; // Clear the file input
 
             } catch (error) {
@@ -130,7 +152,22 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     } else {
-         console.error('Import elements not found (spreadsheetFile, importSpreadsheetButton, modelCardForm, or importMessageArea)');
+         console.error('Import elements not found (spreadsheetFile, importSpreadsheetButton, modelCardForm, importMessageArea, recordNavDiv, prevButton, nextButton, recordCounterSpan)');
+    }
+
+    // Add event listeners for Prev/Next buttons
+    if(prevButton && nextButton) {
+        prevButton.addEventListener('click', () => {
+            if (currentRecordIndex > 0) {
+                displayRecord(currentRecordIndex - 1);
+            }
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentRecordIndex < importedRecords.length - 1) {
+                displayRecord(currentRecordIndex + 1);
+            }
+        });
     }
     // --- End Spreadsheet Import Logic ---
 

@@ -24,7 +24,16 @@ def sample_csv_file(tmp_path):
         "empty_column": None,
         "another_empty": "",
         "numeric_val": 123,
-        "bool_val": True # Note: CSVs don't inherently have bools, often read as string
+        "bool_val": True
+    }, { # Add the second row data here
+        "name": "Test Model CSV 2",
+        "description": "Second row description.",
+        "modelStage": "Testing",
+        "custom.Overview.Name of the AI Solution": "CSV AI Solution 2",
+        "empty_column": "Has Value",
+        "another_empty": "",
+        "numeric_val": 456,
+        "bool_val": False
     }]
     df = pd.DataFrame(data)
     df.to_csv(file_path, index=False)
@@ -68,41 +77,61 @@ def header_only_csv_file(tmp_path):
 
 def test_parse_valid_csv(sample_csv_file):
     """Tests parsing a valid CSV file."""
-    expected_data = {
+    # Define expected data for each row
+    expected_data_1 = {
         "name": "Test Model CSV",
         "description": "Description from CSV.",
         "modelStage": "Development",
         "custom.Overview.Name of the AI Solution": "CSV AI Solution",
-        "numeric_val": 123, # Pandas usually infers numeric types
-        "bool_val": True # Pandas correctly infers boolean from 'True'/'False' in CSV
+        "numeric_val": 123,
+        "bool_val": True
+    }
+    expected_data_2 = {
+        "name": "Test Model CSV 2",
+        "description": "Second row description.",
+        "modelStage": "Testing",
+        "custom.Overview.Name of the AI Solution": "CSV AI Solution 2",
+        "empty_column": "Has Value",
+        "numeric_val": 456,
+        "bool_val": False
     }
     result = parse_spreadsheet(str(sample_csv_file))
     assert result is not None
-    # Convert numeric types back to string for comparison if needed, or compare types
-    assert result.get("numeric_val") == expected_data["numeric_val"]
-    assert result.get("bool_val") is expected_data["bool_val"] # Check boolean value directly
-    assert result.get("name") == expected_data["name"]
-    assert "empty_column" not in result # Should be filtered out
-    assert "another_empty" not in result # Should be filtered out
+    assert isinstance(result, list)
+    assert len(result) == 2
+    # Check first record (filtering applied)
+    assert result[0].get("numeric_val") == expected_data_1["numeric_val"]
+    assert result[0].get("bool_val") is expected_data_1["bool_val"] # Check boolean
+    assert result[0].get("name") == expected_data_1["name"]
+    assert "empty_column" not in result[0] # Check that None was filtered
+    assert "another_empty" not in result[0] # Check that "" was filtered
+    # Check second record (filtering applied)
+    assert result[1].get("numeric_val") == expected_data_2["numeric_val"]
+    assert result[1].get("bool_val") is expected_data_2["bool_val"] # Check boolean
+    assert result[1].get("name") == expected_data_2["name"]
+    assert result[1].get("empty_column") == expected_data_2["empty_column"]
+    assert "another_empty" not in result[1]
+
 
 def test_parse_valid_excel(sample_excel_file):
     """Tests parsing a valid Excel file."""
-    expected_data = {
+    expected_record = [{ # Expect a list containing one record
         "name": "Test Model Excel",
         "description": "Description from Excel.",
         "modelStage": "Production",
         "custom.Accountability.Who is the business sponsor?": "Excel Sponsor",
         "numeric_val": 456.7,
         "bool_val": False # Excel preserves boolean type
-    }
+    }]
     result = parse_spreadsheet(str(sample_excel_file))
     assert result is not None
-    assert result == expected_data # Direct comparison should work better for Excel
+    assert isinstance(result, list)
+    assert result == expected_record # Compare list of records
 
 def test_parse_file_not_found():
     """Tests parsing a non-existent file."""
     result = parse_spreadsheet("non_existent_file.csv")
-    assert result is None
+    assert result is None # Expect None when file is not found
 
 def test_parse_unsupported_format(tmp_path):
     """Tests parsing an unsupported file format."""
@@ -114,11 +143,11 @@ def test_parse_unsupported_format(tmp_path):
 def test_parse_empty_csv(empty_csv_file):
     """Tests parsing an empty CSV file."""
     result = parse_spreadsheet(str(empty_csv_file))
-    assert result is None # Expect None due to EmptyDataError or similar pandas handling
+    assert result == [] # Expect empty list for empty CSV
 
 def test_parse_header_only_csv(header_only_csv_file):
     """Tests parsing a CSV with only headers."""
     result = parse_spreadsheet(str(header_only_csv_file))
-    assert result is None # Expect None as there are no data rows
+    assert result == [] # Expect empty list as there are no data rows
 
 # Add more tests as needed, e.g., for different data types, edge cases, malformed files.

@@ -196,6 +196,27 @@ body {
   white-space: nowrap;
   border-width: 0;
 }
+#recordNavigation button { /* Style the prev/next buttons */
+    padding: 5px 15px;
+    font-size: 0.9em;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 1px solid #6c757d;
+    background-color: #6c757d;
+    color: white;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+#recordNavigation button:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+#recordNavigation button:disabled {
+    background-color: #adb5bd;
+    border-color: #adb5bd;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
 /* --- End Import Section Styles --- */
 
 
