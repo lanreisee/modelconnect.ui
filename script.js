@@ -81,9 +81,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Populate the form and identify sections to open
         for (const key in record) {
-            // Use getElementById for potentially complex IDs with dots
-            const field = document.getElementById(key);
             console.log(`Processing key: "${key}", Value: "${record[key]}"`); // DEBUG: Log key and value
+            // Try finding field by ID directly, then try prepending "custom."
+            let field = document.getElementById(key);
+            if (!field) {
+                // If direct key fails, try adding the 'custom.' prefix
+                const prefixedKey = 'custom.' + key;
+                console.log(`   Field not found with key "${key}", trying "${prefixedKey}"`); // DEBUG
+                field = document.getElementById(prefixedKey);
+            }
+
             if (field && field.form === modelForm) { // Check if the found element belongs to our form
                  console.log(`   Found field:`, field); // DEBUG: Log the found field element
                  // Handle different input types if necessary in the future (e.g., checkboxes)
