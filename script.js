@@ -1,8 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('modelCardForm');
-    const messageArea = document.getElementById('messageArea');
-    // Placeholder API endpoint - replace with your actual backend endpoint
-    const API_ENDPOINT = '/api/modelcard';
+    const messageArea = document.getElementById('messageArea'); // For submit messages
+    // API endpoint for saving data (points to our FastAPI server)
+    const SAVE_API_ENDPOINT = 'http://127.0.0.1:5001/save-model-card';
+    // API endpoint for uploading spreadsheet (points to our FastAPI server)
+    const UPLOAD_API_ENDPOINT = 'http://127.0.0.1:5001/upload-for-form';
+
 
     // --- Accordion Logic ---
     const accordionHeaders = document.querySelectorAll('.accordion-header');
@@ -149,7 +152,8 @@ document.addEventListener('DOMContentLoaded', () => {
             formData.append('file', file);
 
             // Assume Flask server is running on port 5001
-            const uploadUrl = 'http://127.0.0.1:5001/upload-for-form';
+            // Use the constant for the upload URL
+            const uploadUrl = UPLOAD_API_ENDPOINT;
 
             try {
                 importMessageArea.textContent = 'Uploading and processing...';
@@ -233,11 +237,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 data[key] = value;
             });
 
-            console.log('Submitting data:', data); // Log data before sending
+            console.log('Submitting data to save:', data); // Log data before sending
 
             try {
-                // Send data to the placeholder API endpoint
-                const response = await fetch(API_ENDPOINT, {
+                // Send data to the *actual* save endpoint
+                const response = await fetch(SAVE_API_ENDPOINT, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -249,26 +253,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 // In a real scenario, the backend would return appropriate status codes.
                 // Since this is a placeholder, we might not get a real response,
                 // so we'll simulate success for now unless fetch itself throws an error.
-                // A real backend might return 201 Created on success.
+                // A real backend might return 201 Created or 200 OK on success.
 
-                // Simulate success - a real API would provide a meaningful response
-                console.log('Placeholder response received:', response);
-                messageArea.textContent = 'Model card data submitted successfully (Placeholder)!';
-                messageArea.className = 'success';
-                form.reset(); // Optionally clear the form on success
+                const result = await response.json(); // Get response from backend
 
-                // Handle potential non-OK responses if the placeholder *did* respond
                 if (!response.ok) {
-                     // Attempt to read error message if backend sent one
-                    let errorMsg = `HTTP error! Status: ${response.status}`;
-                    try {
-                        const errorData = await response.json();
-                        errorMsg = errorData.message || JSON.stringify(errorData);
-                    } catch (e) {
-                        // Ignore if response body isn't JSON
-                    }
-                    throw new Error(errorMsg);
+                    // Use error message from backend if available
+                    throw new Error(result.detail || result.error || `HTTP error! Status: ${response.status}`);
                 }
+
+                console.log('Save response received:', result);
+                messageArea.textContent = result.message || 'Model card data saved successfully!'; // Use message from backend
+                messageArea.className = 'message-area success'; // Use specific class
+                form.reset(); // Clear the form on success
+                // Optionally hide record navigation if needed after successful save
+                // if (recordNavDiv) recordNavDiv.style.display = 'none';
+                // importedRecords = [];
+                // currentRecordIndex = -1;
 
 
             } catch (error) {
