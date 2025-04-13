@@ -81,9 +81,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Populate the form and identify sections to open
         for (const key in record) {
-            const field = modelForm.elements[key]; // Find field by name or id
+            // Use getElementById for potentially complex IDs with dots
+            const field = document.getElementById(key);
             console.log(`Processing key: "${key}", Value: "${record[key]}"`); // DEBUG: Log key and value
-            if (field) {
+            if (field && field.form === modelForm) { // Check if the found element belongs to our form
                  console.log(`   Found field:`, field); // DEBUG: Log the found field element
                  // Handle different input types if necessary in the future (e.g., checkboxes)
                  // For now, assuming all are text/textarea
