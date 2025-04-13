@@ -63,20 +63,55 @@ document.addEventListener('DOMContentLoaded', () => {
         currentRecordIndex = index;
         const record = importedRecords[index];
 
+        // --- Close all accordion sections first ---
+        accordionHeaders.forEach(header => {
+            const content = header.nextElementSibling;
+            header.classList.remove('active');
+            if (content && content.classList.contains('accordion-content')) {
+                content.classList.remove('active');
+                content.style.display = 'none';
+            }
+        });
+        // -----------------------------------------
+
         // Clear existing form fields before populating
         modelForm.reset();
 
-        // Populate the form
+        const sectionsToOpen = new Set(); // Keep track of sections with data
+
+        // Populate the form and identify sections to open
         for (const key in record) {
-            const field = modelForm.elements[key];
+            const field = modelForm.elements[key]; // Find field by name or id
+            console.log(`Processing key: "${key}", Value: "${record[key]}"`); // DEBUG: Log key and value
             if (field) {
+                 console.log(`   Found field:`, field); // DEBUG: Log the found field element
                  // Handle different input types if necessary in the future (e.g., checkboxes)
                  // For now, assuming all are text/textarea
                 field.value = record[key];
+                console.log(`   Set field value to: "${field.value}"`); // DEBUG: Confirm value was set
+
+                // Find the parent accordion item and mark it for opening
+                const sectionItem = field.closest('.accordion-item');
+                if (sectionItem) {
+                    sectionsToOpen.add(sectionItem);
+                }
+
             } else {
                 console.warn(`Form field with name/id '${key}' not found for record ${index}.`);
             }
         }
+
+        // --- Open sections that received data ---
+        sectionsToOpen.forEach(sectionItem => {
+            const header = sectionItem.querySelector('.accordion-header');
+            const content = sectionItem.querySelector('.accordion-content');
+            if (header && content) {
+                header.classList.add('active');
+                content.classList.add('active');
+                content.style.display = 'block';
+            }
+        });
+        // --------------------------------------
 
         // Update navigation controls
         recordCounterSpan.textContent = `Record ${index + 1} of ${importedRecords.length}`;
