@@ -170,8 +170,64 @@ async def upload_file_for_form(file: UploadFile = File(...)):
     Handles spreadsheet upload, parses all rows, and returns data
     for form population.
     """
-    # ... (rest of the upload logic remains the same) ...
-    # ... (it returns the list of dicts with original keys) ...
+    if not allowed_file(file.filename):
+        logging.warning(f"File type not allowed: {file.filename}")
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="File type not allowed. Please upload CSV or Excel files."
+        )
+
+    temp_file_path = os.path.join(UPLOAD_FOLDER, file.filename)
+
+    try:
+        # Save the uploaded file temporarily
+        with open(temp_file_path, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+        logging.info(f"File saved temporarily to: {temp_file_path}")
+
+        # Parse the saved spreadsheet
+        parsed_data = parse_spreadsheet(temp_file_path)
+
+        if parsed_data is None:
+            # This case might occur if parser.py had an internal error returning None
+            # instead of an empty list for empty files.
+            logging.error(f"Parsing returned None for file: {file.filename}")
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail="Failed to parse spreadsheet data. Parser returned None."
+            )
+        elif not isinstance(parsed_data, list):
+             # Defensive check: Ensure parser actually returned a list
+             logging.error(f"Parser returned non-list type: {type(parsed_data)} for file: {file.filename}")
+             raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail="Internal error: Parser did not return expected data format."
+             )
+
+        logging.info(f"Successfully parsed data for {file.filename}")
+        # --- Detailed logging removed ---
+        return parsed_data
+
+    except HTTPException as http_exc:
+        # Re-raise HTTPExceptions directly
+        raise http_exc
+    except Exception as e:
+        logging.error(f"Error during file processing {file.filename}: {e}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"An internal server error occurred: {e}"
+        )
+    finally:
+        # Ensure the temporary file is deleted
+        if os.path.exists(temp_file_path):
+            try:
+                os.remove(temp_file_path)
+                logging.info(f"Removed temporary file: {temp_file_path}")
+            except OSError as e_rem:
+                logging.error(f"Error removing temporary file {temp_file_path}: {e_rem}")
+        # Close the file stream associated with UploadFile
+        await file.close()
+
 
 @app.post("/save-model-card")
 async def save_model_card(model_card_data: Dict[str, Any] = Body(...)):
